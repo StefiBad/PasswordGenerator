@@ -15,7 +15,7 @@ Un generador de contraseñas y suite de seguridad de auditoría interactivo y ba
 No requiere dependencias complejas ni servidores locales dedicados. Solo clona el repositorio y abre el archivo principal en cualquier navegador web moderno:
 
 ```bash
-git clone [https://github.com/StefiBad/PasswordGenerator](https://github.com/StefiBad/PasswordGenerator)
+git clone https://github.com/StefiBad/PasswordGenerator
 cd PasswordGenerator
 # Abre index.html en tu navegador preferido (Chrome, Firefox, Edge...)
 ```
