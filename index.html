@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suite de Seguridad y Auditoría de Credenciales</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div class="top-control-bar">
+        <button class="theme-toggle-btn" id="theme-toggle-btn" onclick="toggleTheme()">
+            <span id="theme-icon">🌙</span> <span id="theme-text">Modo Oscuro</span>
+        </button>
+    </div>
+
+    <div class="dashboard-container" id="main-dashboard">
+        
+        <div class="side-panel">
+            <h3>Auditoría de Métricas</h3>
+            <div id="audit-list">
+                <div class="audit-item"><span>Longitud (L):</span><span class="audit-val" id="audit-len">0 pts</span></div>
+                <div class="audit-item"><span>Diversidad tipos:</span><span class="audit-val" id="audit-div">0 pts</span></div>
+                <div class="audit-item"><span>Mezcla Homogénea:</span><span class="audit-val" id="audit-homo">0 pts</span></div>
+                <div class="audit-item"><span>Clasificación:</span><span class="audit-val" id="audit-classification">Ninguna</span></div>
+            </div>
+
+            <div class="stat-grid">
+                <div class="stat-box"><div class="stat-num" id="stat-generated">0</div><div class="stat-lbl">Generadas</div></div>
+                <div class="stat-box"><div class="stat-num" id="stat-current-strength">0%</div><div class="stat-lbl">Fuerza</div></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="tabs-nav">
+                <button class="tab-btn active" onclick="switchTab('generator-tab')">Generador</button>
+                <button class="tab-btn" onclick="switchTab('history-tab')">Historial</button>
+            </div>
+
+            <div id="generator-tab" class="tab-content active">
+                <h2>Generación de Claves Seguras</h2>
+                <div class="result-container">
+                    <span id="password-display">Haz clic en Generar</span>
+                    <button id="copy-btn" class="icon-btn" title="Copiar al portapapeles">📋</button>
+                </div>
+                <div class="settings">
+                    <div class="setting">
+                        <label for="length">Longitud de caracteres (8-30):</label>
+                        <input type="number" id="length" min="8" max="30" value="14">
+                    </div>
+                    <div class="setting"><label><input type="checkbox" id="uppercase" checked> Permitir letras mayúsculas (A-Z)</label></div>
+                    <div class="setting"><label><input type="checkbox" id="lowercase" checked> Permitir letras minúsculas (a-z)</label></div>
+                    <div class="setting"><label><input type="checkbox" id="numbers" checked> Permitir caracteres numéricos (0-9)</label></div>
+                    <div class="setting"><label><input type="checkbox" id="symbols"> Permitir símbolos especiales (!@#$)</label></div>
+                </div>
+                <button id="generate-btn" class="btn-large">Generar credencial</button>
+            </div>
+
+            <div id="history-tab" class="tab-content">
+                <div class="history-header">
+                    <h2>Historial de Registros</h2>
+                    <button class="clear-all-btn" id="clear-history-btn" style="display: none;" onclick="promptClearAll()">Vaciar todo</button>
+                </div>
+                <div class="history-list" id="history-container">
+                    <div class="empty-history">No se han generado credenciales en esta sesión.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="side-panel">
+            <h3>Probador Manual (Sandbox)</h3>
+            <input type="text" id="sandbox-input" class="sandbox-input" placeholder="Escribe una contraseña...">
+            <div class="strength-container" style="margin-top: 0; margin-bottom: 16px;">
+                <div class="strength-bar-solid" id="sandbox-bar"></div>
+            </div>
+
+            <h3>Recomendación</h3>
+            <div class="tips-box" id="tips-container">
+                Introduce caracteres en el campo de pruebas para evaluar su fortaleza en tiempo real.
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="global-modal">
+        <div class="modal-box">
+            <h3 id="modal-title">Confirmación</h3>
+            <div id="modal-custom-content"></div>
+            <p style="font-size: 0.85rem; color: var(--text-sub); margin-top: 8px;" id="modal-desc"></p>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-cancel" onclick="closeModal()">Cerrar</button>
+                <button class="modal-btn modal-btn-confirm" id="modal-confirm-action">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
